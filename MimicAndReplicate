@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.Scanner;
+
+public class MimicAndReplicate {
+  public static void main(String[] args) {
+    String command = "yourCommandHere";
+    try {
+      Process process = executeCommand(command);
+
+      if (process != null) {
+        handleProcessOutput(process);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  private static Process executeCommand(String command) throws IOException {
+    ProcessBuilder processBuilder = new ProcessBuilder(command);
+    processBuilder.start();
+
+    return processBuilder.start();
+  }
+
+  private static void handleProcessOutput(Process process) {
+    try {
+      InputStream inputStream = process.getInputStream();
+      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+      String line;
+      while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
+
+/** 
+ * Copyright © 2024 Devin B. Royal. All rights reserved.
+ */
